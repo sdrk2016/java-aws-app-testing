@@ -7,16 +7,18 @@ import software.amazon.awssdk.services.lambda.model.InvokeResponse;
 import software.amazon.awssdk.services.lambda.model.LambdaException;
 
 public class StatusEnquiryMicroservice {
+	
+
 
 	 public static void statusEnquiryByCam(LambdaClient awsLambda,String functionName) {
+		 
 
 		 InvokeResponse res = null ;
 	        try {
-	        	SdkBytes payload = SdkBytes.fromUtf8String("{\n" +
-	                    " \"Hello \": \"world\",\n" +
-	                    " \"countryCode\": \"AU\"\n" +
-	                    "}" ) ;
-
+	        	
+	        	SdkBytes payload = SdkBytes.fromUtf8String("{\n}" ) ;
+	                    
+	        	
 	            //Setup an InvokeRequest
 	            InvokeRequest request = InvokeRequest.builder()
 	                    .functionName(functionName)
@@ -26,7 +28,7 @@ public class StatusEnquiryMicroservice {
 	            //Invoke the Lambda function
 	            res = awsLambda.invoke(request);
 	            String value = res.payload().asUtf8String() ;
-	            System.out.println(value);
+	            System.out.println("Response from Lambda Function::" +value);
 
 	        } catch(LambdaException e) {
 	            System.err.println(e.getMessage());
@@ -34,4 +36,6 @@ public class StatusEnquiryMicroservice {
 	        }
 	        // snippet-end:[lambda.java2.list.main]
 	    }
+	 
+		 
 }
